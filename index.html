@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do Persistente</title>
+    <title>To-Do Persistente | Missão LocalStorage</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <div id="app">
-        <h2>Meu To-Do</h2>
-        <input type="text" id="taskInput" placeholder="Nova tarefa..." />
-        <button id="addTaskBtn">Adicionar</button>
         
-        <ul id="taskList"></ul>
-        <button id="clearStorageBtn" style="background-color: #666; margin-top: 5px;">Limpar Lista</button>
+        <h2>Meu To-Do</h2>
+
+        <section class="input-group">
+            <input type="text" id="taskInput" placeholder="Nova tarefa..." />
+            
+            <button id="addTaskBtn">Adicionar</button>
+            
+            <button id="clearStorageBtn" style="background-color: #444; margin-top: 10px; font-size: 0.85rem;">
+                Limpar Todas as Tarefas
+            </button>
+        </section>
+
+        <section class="list-container">
+            <ul id="taskList"></ul>
+        </section>
     </div>
 
-    
     <script src="scripts.js"></script>
 </body>
 </html>
