@@ -1,6 +1,7 @@
 const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
+const clearStorageBtn = document.getElementById('clearStorageBtn');
 
 let tasks = JSON.parse(localStorage.getItem('minhasTarefas')) || [];
 
@@ -38,3 +39,16 @@ window.onload = () => {
     taskInput.value = sessionStorage.getItem('rascunho') || '';
     renderTasks();
 };
+
+clearStorageBtn.addEventListener('click', () => {
+    if (confirm("Deseja realmente apagar todas as tarefas salvas?")) {
+        // Limpa o array na memória
+        tasks = [];
+        
+        // Remove do LocalStorage (o "cofre")
+        localStorage.removeItem('minhasTarefas');
+        
+        // Atualiza a tela (vai ficar vazia)
+        renderTasks();
+    }
+});
