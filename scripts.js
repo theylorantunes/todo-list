@@ -6,26 +6,39 @@ const clearStorageBtn = document.getElementById('clearStorageBtn');
 let tasks = JSON.parse(localStorage.getItem('minhasTarefas')) || [];
 
 function renderTasks() {
-    taskList.innerHTML = '';
+    taskList.innerHTML = ''; 
     tasks.forEach((task, index) => {
         const li = document.createElement('li');
         li.textContent = task;
+        li.className = 'task-item';
         taskList.appendChild(li);
     });
 }
 
 
 function saveToLocalStorage() {
+
     localStorage.setItem('minhasTarefas', JSON.stringify(tasks));
 }
 
+
 addTaskBtn.addEventListener('click', () => {
-    if (taskInput.value.trim() !== "") {
-        tasks.push(taskInput.value);
+    const text = taskInput.value.trim();
+    if (text !== "") {
+        tasks.push(text);
         saveToLocalStorage();
         renderTasks();
         taskInput.value = "";
         sessionStorage.removeItem('rascunho'); 
+    }
+});
+
+
+clearStorageBtn.addEventListener('click', () => {
+    if (confirm("Deseja apagar todas as tarefas?")) {
+        tasks = []; 
+        localStorage.removeItem('minhasTarefas'); 
+        renderTasks(); 
     }
 });
 
@@ -36,19 +49,7 @@ taskInput.addEventListener('input', (e) => {
 
 
 window.onload = () => {
+
     taskInput.value = sessionStorage.getItem('rascunho') || '';
     renderTasks();
 };
-
-clearStorageBtn.addEventListener('click', () => {
-    if (confirm("Deseja realmente apagar todas as tarefas salvas?")) {
-        // Limpa o array na memória
-        tasks = [];
-        
-        // Remove do LocalStorage (o "cofre")
-        localStorage.removeItem('minhasTarefas');
-        
-        // Atualiza a tela (vai ficar vazia)
-        renderTasks();
-    }
-});
